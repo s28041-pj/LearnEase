@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  mysql-learnease-db:
+    container_name: learnease-mysql
+    image: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: learnease
+    volumes:
+      - mysql-learnease-data:/var/lib/mysql
+
+volumes:
+  mysql-learnease-data:
