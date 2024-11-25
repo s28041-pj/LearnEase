@@ -18,17 +18,19 @@ public class Ranking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer rankingId;
 
+    @Column(name = "rank", nullable = false)
     private Integer rank;
 
     @Column(name = "previous_rank")
     private Integer previousRank;
 
+    @Column(name = "points", nullable = false)
     private Float points;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "last_update")
+    @Column(name = "last_update", nullable = false)
     private LocalDateTime lastUpdate;
 }

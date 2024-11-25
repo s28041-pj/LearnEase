@@ -6,6 +6,7 @@ import pl.pjatk.learnease.entity.learn.Subject;
 import pl.pjatk.learnease.entity.user.User;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "diagnostic_tests")
@@ -20,20 +21,22 @@ public class DiagnosticTest {
     private Integer diagnosticTestId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    @Column(name = "date_taken")
-    private LocalDate dateTaken;
+    @Column(name = "date_taken", nullable = false)
+    private LocalDateTime dateTaken;
 
+    @Column(name = "score", nullable = false)
     private Float score;
 
     @Column(name = "previous_score")
     private Float previousScore;
 
+    @Column(name = "deleted", nullable = false)
     private boolean deleted;
 }

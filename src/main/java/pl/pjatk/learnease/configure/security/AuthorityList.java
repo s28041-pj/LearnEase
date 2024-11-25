@@ -1,4 +1,4 @@
-package pl.pjatk.learnease.configure;
+package pl.pjatk.learnease.configure.security;
 
 
 import static pl.pjatk.learnease.entity.user.Role.ADMIN;

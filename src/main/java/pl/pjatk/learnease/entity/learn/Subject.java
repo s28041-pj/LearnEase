@@ -15,9 +15,12 @@ public class Subject {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer subjectId;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "description", nullable = false)
     private String description;
 
+    @Column(name = "deleted", nullable = false)
     private boolean deleted;
 }

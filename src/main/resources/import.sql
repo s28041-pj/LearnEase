@@ -1,62 +1,62 @@
 CREATE TABLE levels
 (
     level_id    INT PRIMARY KEY AUTO_INCREMENT,
-    name        VARCHAR(255),
-    description VARCHAR(255),
-    deleted     BOOLEAN
+    name        VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    deleted     BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE users
 (
     user_id    INT PRIMARY KEY AUTO_INCREMENT,
-    username   VARCHAR(255) UNIQUE,
-    email      VARCHAR(255) UNIQUE,
-    password   VARBINARY(255),
+    username   VARCHAR(255) NOT NULL UNIQUE,
+    email      VARCHAR(255) NOT NULL UNIQUE,
+    password   VARBINARY(255) NOT NULL,
     level_id   INT,
-    created_at DATE,
-    role       VARCHAR(255),
-    deleted    BOOLEAN,
+    created_at TIMESTAMP NOT NULL,
+    role       VARCHAR(255) NOT NULL,
+    deleted    BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (level_id) REFERENCES levels (level_id)
 );
 
 CREATE TABLE rankings
 (
     ranking_id    INT PRIMARY KEY AUTO_INCREMENT,
-    ranking       INT,
+    ranking       INT NOT NULL,
     previous_rank INT,
-    points        FLOAT,
-    user_id       INT UNIQUE,
-    last_update   TIMESTAMP,
+    points        FLOAT NOT NULL,
+    user_id       INT NOT NULL UNIQUE,
+    last_update   TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE logs
 (
     log_id   INT PRIMARY KEY AUTO_INCREMENT,
-    user_id  INT,
-    log_date TIMESTAMP,
-    content  VARCHAR(255),
+    user_id  INT NOT NULL,
+    log_date TIMESTAMP NOT NULL,
+    content  VARCHAR(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE TABLE subjects
 (
     subject_id  INT PRIMARY KEY AUTO_INCREMENT,
-    name        VARCHAR(255),
-    description VARCHAR(255),
-    deleted     BOOLEAN
+    name        VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    deleted     BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE materials
 (
     material_id INT PRIMARY KEY AUTO_INCREMENT,
-    subject_id  INT,
-    level_id    INT,
-    title       VARCHAR(255),
-    pdf_url     VARCHAR(255),
-    created_at  DATE,
-    completed   BOOLEAN,
-    deleted     BOOLEAN,
+    subject_id  INT NOT NULL,
+    level_id    INT NOT NULL,
+    title       VARCHAR(255) NOT NULL,
+    pdf_url     VARCHAR(255) NOT NULL,
+    created_at  TIMESTAMP NOT NULL,
+    completed   BOOLEAN DEFAULT FALSE,
+    deleted     BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (subject_id) REFERENCES subjects (subject_id),
     FOREIGN KEY (level_id) REFERENCES levels (level_id)
 );
@@ -64,11 +64,11 @@ CREATE TABLE materials
 CREATE TABLE flashcards
 (
     flashcard_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id      INT,
-    subject_id   INT,
-    front_text   VARCHAR(255),
-    back_text    VARCHAR(255),
-    deleted      BOOLEAN,
+    user_id      INT NOT NULL,
+    subject_id   INT NOT NULL,
+    front_text   VARCHAR(255) NOT NULL,
+    back_text    VARCHAR(255) NOT NULL,
+    deleted      BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (subject_id) REFERENCES subjects (subject_id)
 );
@@ -76,12 +76,12 @@ CREATE TABLE flashcards
 CREATE TABLE diagnostic_tests
 (
     diagnostic_test_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id            INT,
-    subject_id         INT,
-    date_taken         DATE,
-    score              FLOAT,
+    user_id            INT NOT NULL,
+    subject_id         INT NOT NULL,
+    date_taken         TIMESTAMP NOT NULL,
+    score              FLOAT NOT NULL,
     previous_score     FLOAT,
-    deleted            BOOLEAN,
+    deleted            BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (subject_id) REFERENCES subjects (subject_id)
 );
@@ -89,12 +89,12 @@ CREATE TABLE diagnostic_tests
 CREATE TABLE checking_tests
 (
     checking_test_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id          INT,
-    subject_id       INT,
-    test_date        DATE,
-    score            FLOAT,
+    user_id          INT NOT NULL,
+    subject_id       INT NOT NULL,
+    test_date        TIMESTAMP NOT NULL,
+    score            FLOAT NOT NULL,
     previous_score   FLOAT,
-    deleted          BOOLEAN,
+    deleted          BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (subject_id) REFERENCES subjects (subject_id)
 );
@@ -102,11 +102,11 @@ CREATE TABLE checking_tests
 CREATE TABLE quiz_rooms
 (
     quiz_room_id INT PRIMARY KEY AUTO_INCREMENT,
-    name         VARCHAR(255),
+    name         VARCHAR(255) NOT NULL,
     access_code  VARCHAR(255) UNIQUE NOT NULL,
-    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    started_at   TIMESTAMP NULL,
-    ended_at     TIMESTAMP NULL,
+    created_at   TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    started_at   TIMESTAMP,
+    ended_at     TIMESTAMP,
     completed    BOOLEAN DEFAULT FALSE,
     status       VARCHAR(255) DEFAULT 'CREATED'
 );
@@ -114,8 +114,8 @@ CREATE TABLE quiz_rooms
 CREATE TABLE quiz_participants
 (
     participant_id INT PRIMARY KEY AUTO_INCREMENT,
-    quiz_room_id   INT,
-    user_id        INT,
+    quiz_room_id   INT NOT NULL,
+    user_id        INT NOT NULL,
     score          FLOAT DEFAULT 0,
     joined_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     completed      BOOLEAN DEFAULT FALSE,
@@ -127,15 +127,15 @@ CREATE TABLE quiz_participants
 CREATE TABLE questions
 (
     question_id        INT PRIMARY KEY AUTO_INCREMENT,
-    answer_a           VARCHAR(255),
-    answer_b           VARCHAR(255),
-    answer_c           VARCHAR(255),
-    answer_d           VARCHAR(255),
-    correct_answer     VARCHAR(255),
+    answer_a           VARCHAR(255) NOT NULL,
+    answer_b           VARCHAR(255) NOT NULL,
+    answer_c           VARCHAR(255) NOT NULL,
+    answer_d           VARCHAR(255) NOT NULL,
+    correct_answer     VARCHAR(255) NOT NULL,
     checking_test_id   INT,
     diagnostic_test_id INT,
     quiz_room_id       INT,
-    deleted            BOOLEAN,
+    deleted            BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (checking_test_id) REFERENCES checking_tests (checking_test_id),
     FOREIGN KEY (diagnostic_test_id) REFERENCES diagnostic_tests (diagnostic_test_id),
     FOREIGN KEY (quiz_room_id) REFERENCES quiz_rooms (quiz_room_id)
@@ -144,10 +144,10 @@ CREATE TABLE questions
 CREATE TABLE quiz_answers
 (
     quiz_answer_id INT PRIMARY KEY AUTO_INCREMENT,
-    question_id    INT,
-    user_id        INT,
-    selected_answer VARCHAR(255),
-    correct        BOOLEAN,
+    question_id    INT NOT NULL,
+    user_id        INT NOT NULL,
+    selected_answer VARCHAR(255) NOT NULL,
+    correct        BOOLEAN NOT NULL,
     FOREIGN KEY (question_id) REFERENCES questions (question_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     UNIQUE (question_id, user_id)
@@ -156,11 +156,11 @@ CREATE TABLE quiz_answers
 CREATE TABLE answers
 (
     answer_id   INT PRIMARY KEY AUTO_INCREMENT,
-    question_id INT,
-    user_id     INT,
-    user_answer VARCHAR(255),
-    correct     BOOLEAN,
-    deleted     BOOLEAN,
+    question_id INT NOT NULL,
+    user_id     INT NOT NULL,
+    user_answer VARCHAR(255) NOT NULL,
+    correct     BOOLEAN NOT NULL,
+    deleted     BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (question_id) REFERENCES questions (question_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
@@ -169,9 +169,9 @@ CREATE TABLE points
 (
     point_id         INT PRIMARY KEY AUTO_INCREMENT,
     checking_test_id INT,
-    user_id          INT,
+    user_id          INT NOT NULL,
     material_id      INT,
-    deleted          BOOLEAN,
+    deleted          BOOLEAN DEFAULT FALSE,
     FOREIGN KEY (checking_test_id) REFERENCES checking_tests (checking_test_id),
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (material_id) REFERENCES materials (material_id)
@@ -180,12 +180,12 @@ CREATE TABLE points
 CREATE TABLE progress_trackings
 (
     progress_id        INT PRIMARY KEY AUTO_INCREMENT,
-    user_id            INT,
+    user_id            INT NOT NULL,
     material_id        INT,
     checking_test_id   INT,
     diagnostic_test_id INT,
-    progress_value     FLOAT,
-    updated_at         DATE,
+    progress_value     FLOAT NOT NULL,
+    updated_at         TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (user_id),
     FOREIGN KEY (material_id) REFERENCES materials (material_id),
     FOREIGN KEY (checking_test_id) REFERENCES checking_tests (checking_test_id),

@@ -20,9 +20,10 @@ import java.util.List;
 public class QuizRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "quiz_room_id", nullable = false)
+    @Column(name = "quiz_room_id")
     private Integer quizRoomId;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
     @Column(name = "access_code", unique = true, nullable = false)
@@ -32,15 +33,15 @@ public class QuizRoom {
     @JoinTable(
         name = "quiz_participants",
         joinColumns = @JoinColumn(name = "quiz_room_id"),
-        inverseJoinColumns = @JoinColumn(name = "user_id")
+        inverseJoinColumns = @JoinColumn(name = "user_id",
+        nullable = false)
     )
     private List<User> participants;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quiz_room_id")
+    @OneToMany(mappedBy = "quizRoom", fetch = FetchType.LAZY)
     private List<Question> questions;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
     @Column(name = "started_at")
@@ -50,8 +51,10 @@ public class QuizRoom {
     private LocalDateTime endedAt;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
     private QuizStatus status;
 
+    @Column(name = "completed", nullable = false)
     private boolean completed = false;
 
 }

@@ -21,17 +21,17 @@ public class QuizAnswers {
     private Integer quizAnswerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "question_id")
+    @JoinColumn(name = "question_id", nullable = false)
     private Question question;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "selected_answer")
+    @Column(name = "selected_answer", nullable = false)
     private String selectedAnswer;
 
-    @Column(name = "correct")
+    @Column(name = "correct", nullable = false)
     private boolean correct;
 
 }
