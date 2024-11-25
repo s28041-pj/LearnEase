@@ -22,7 +22,7 @@ CREATE TABLE users
 CREATE TABLE rankings
 (
     ranking_id    INT PRIMARY KEY AUTO_INCREMENT,
-    ranking          INT,
+    ranking       INT,
     previous_rank INT,
     points        FLOAT,
     user_id       INT UNIQUE,
@@ -99,6 +99,31 @@ CREATE TABLE checking_tests
     FOREIGN KEY (subject_id) REFERENCES subjects (subject_id)
 );
 
+CREATE TABLE quiz_rooms
+(
+    quiz_room_id INT PRIMARY KEY AUTO_INCREMENT,
+    name         VARCHAR(255),
+    access_code  VARCHAR(255) UNIQUE NOT NULL,
+    created_at   TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    started_at   TIMESTAMP NULL,
+    ended_at     TIMESTAMP NULL,
+    completed    BOOLEAN DEFAULT FALSE,
+    status       VARCHAR(255) DEFAULT 'CREATED'
+);
+
+CREATE TABLE quiz_participants
+(
+    participant_id INT PRIMARY KEY AUTO_INCREMENT,
+    quiz_room_id   INT,
+    user_id        INT,
+    score          FLOAT DEFAULT 0,
+    joined_at      TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    completed      BOOLEAN DEFAULT FALSE,
+    FOREIGN KEY (quiz_room_id) REFERENCES quiz_rooms (quiz_room_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    UNIQUE (quiz_room_id, user_id)
+);
+
 CREATE TABLE questions
 (
     question_id        INT PRIMARY KEY AUTO_INCREMENT,
@@ -109,9 +134,23 @@ CREATE TABLE questions
     correct_answer     VARCHAR(255),
     checking_test_id   INT,
     diagnostic_test_id INT,
+    quiz_room_id       INT,
     deleted            BOOLEAN,
     FOREIGN KEY (checking_test_id) REFERENCES checking_tests (checking_test_id),
-    FOREIGN KEY (diagnostic_test_id) REFERENCES diagnostic_tests (diagnostic_test_id)
+    FOREIGN KEY (diagnostic_test_id) REFERENCES diagnostic_tests (diagnostic_test_id),
+    FOREIGN KEY (quiz_room_id) REFERENCES quiz_rooms (quiz_room_id)
+);
+
+CREATE TABLE quiz_answers
+(
+    quiz_answer_id INT PRIMARY KEY AUTO_INCREMENT,
+    question_id    INT,
+    user_id        INT,
+    selected_answer VARCHAR(255),
+    correct        BOOLEAN,
+    FOREIGN KEY (question_id) REFERENCES questions (question_id),
+    FOREIGN KEY (user_id) REFERENCES users (user_id),
+    UNIQUE (question_id, user_id)
 );
 
 CREATE TABLE answers
@@ -162,8 +201,10 @@ INSERT INTO materials (subject_id, level_id, title, pdf_url, created_at, complet
 INSERT INTO flashcards (user_id, subject_id, front_text, back_text, deleted) VALUES (1, 1, 'What is 2 + 2?', '4', false);
 INSERT INTO diagnostic_tests (user_id, subject_id, date_taken, score, previous_score, deleted) VALUES (1, 1, '2024-11-10', 85.0, 80.0, false);
 INSERT INTO checking_tests (user_id, subject_id, test_date, score, previous_score, deleted) VALUES (1, 1, '2024-11-15', 90.0, 85.0, false);
-INSERT INTO questions (answer_a, answer_b, answer_c, answer_d, correct_answer, checking_test_id, diagnostic_test_id, deleted) VALUES ('2', '3', '4', '5', '4', 1, 1, false);
+INSERT INTO quiz_rooms (name, access_code, started_at, ended_at, completed, status) VALUES ('Math Quiz Room', 'ABC123', NULL, NULL, FALSE, 'CREATED');
+INSERT INTO quiz_participants (quiz_room_id, user_id, score, completed) VALUES (1, 1, 0, FALSE);
+INSERT INTO questions (answer_a, answer_b, answer_c, answer_d, correct_answer, checking_test_id, diagnostic_test_id, quiz_room_id, deleted) VALUES ('2', '3', '4', '5', '4', null, 1, null, false);
+INSERT INTO quiz_answers (question_id, user_id, selected_answer, correct) VALUES (1, 1, '4', TRUE);
 INSERT INTO answers (question_id, user_id, user_answer, correct, deleted) VALUES (1, 1, '4', true, false);
 INSERT INTO points (checking_test_id, user_id, material_id, deleted) VALUES (1, 1, 1, false);
-INSERT INTO progress_trackings (user_id, material_id, checking_test_id, diagnostic_test_id, progress_value, updated_at) VALUES (1, 1, 1, 1, 75.5, '2024-11-18');
-
+INSERT INTO progress_trackings (user_id, material_id, checking_test_id, diagnostic_test_id, progress_value, updated_at) VALUES (1, null, null, 1, 75.5, '2024-11-18');

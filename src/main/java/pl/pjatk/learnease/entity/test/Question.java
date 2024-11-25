@@ -2,6 +2,7 @@ package pl.pjatk.learnease.entity.test;
 
 import jakarta.persistence.*;
 import lombok.*;
+import pl.pjatk.learnease.entity.quiz.QuizRoom;
 
 @Entity
 @Table(name = "questions")
@@ -37,6 +38,10 @@ public class Question {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "diagnostic_test_id")
     private DiagnosticTest diagnosticTest;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quiz_room_id")
+    private QuizRoom quizRoom;
 
     private boolean deleted;
 }
