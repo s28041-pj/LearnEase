@@ -33,31 +33,28 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         return http
-                .userDetailsService(userDetailsService)
                 .csrf(CsrfConfigurer::disable)
-                .exceptionHandling(exceptionHandling ->
-                        exceptionHandling.authenticationEntryPoint((request, response, authException) -> {
-                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                            response.getWriter().write("{\"error\": \"Unauthorized\"}");
-                            response.getWriter().flush();
-                        })
-                )
+                .userDetailsService(userDetailsService)
+                .exceptionHandling(exceptionHandling -> exceptionHandling.accessDeniedHandler(new CustomAccessDeniedHandler()))
                 .authorizeHttpRequests(customizer -> customizer
+                        // panels
+                        .requestMatchers("/user-panel.html").hasAnyAuthority(anyAuthority)
+                        .requestMatchers("/admin-panel.html").hasAuthority(adminAuthority)
 
-                //panels
-                .requestMatchers("/user-panel.html").hasAnyAuthority(anyAuthority)
-                .requestMatchers("/admin-panel.html").hasAuthority(adminAuthority)
+                        // flashcards
+                        .requestMatchers("/flashcards",
+                                "/flashcards/*").hasAnyAuthority(anyAuthority)
 
-                //flashcards
-                .requestMatchers("/flashcards").hasAnyAuthority(anyAuthority)
+                        //add login
+                        .requestMatchers("/add-login.html").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/add-login").permitAll()
+                        .anyRequest().authenticated()
 
-                //add login
-                .requestMatchers("/add-login.html").permitAll()
-                .requestMatchers(HttpMethod.POST,"/add-login").permitAll()
-                .anyRequest().authenticated()
                 )
                 .formLogin(customizer -> customizer
+                        .loginPage("/login.html")
                         .loginProcessingUrl("/login")
+                        .permitAll()
                         .successHandler(httpLoginSuccessHandler)
                         .failureHandler(httpLoginFailureHandler)
                 )
@@ -70,5 +67,6 @@ public class SecurityConfig {
                 )
                 .build();
     }
+
 
 }

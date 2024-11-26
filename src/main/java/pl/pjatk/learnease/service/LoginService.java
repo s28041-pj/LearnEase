@@ -3,6 +3,7 @@ package pl.pjatk.learnease.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import pl.pjatk.learnease.configure.exception.BusinessException;
 import pl.pjatk.learnease.entity.user.Role;
 import pl.pjatk.learnease.entity.user.User;
 import pl.pjatk.learnease.entity.user.dto.RequestedLogin;
@@ -22,7 +23,7 @@ public class LoginService {
         if (foundUser.isEmpty()) {
             User createdUser = createUser(login);
             userRepository.save(createdUser);
-        } else throw new RuntimeException("Cannot create login!");
+        } else throw new BusinessException("Cannot create login!");
     }
 
     private User createUser(RequestedLogin login) {

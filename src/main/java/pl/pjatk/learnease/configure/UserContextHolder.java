@@ -4,6 +4,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import pl.pjatk.learnease.configure.exception.BusinessException;
 import pl.pjatk.learnease.configure.security.CustomUserDetails;
 import pl.pjatk.learnease.entity.user.User;
 
@@ -18,7 +19,7 @@ public class UserContextHolder {
                 return ((CustomUserDetails) principal).getUser();
             }
         }
-        throw new RuntimeException("No authenticated user found");
+        throw new BusinessException("No authenticated user found");
     }
 
     public static void setContextUser(User user) {

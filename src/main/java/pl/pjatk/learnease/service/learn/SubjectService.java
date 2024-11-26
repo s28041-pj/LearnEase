@@ -2,6 +2,7 @@ package pl.pjatk.learnease.service.learn;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import pl.pjatk.learnease.configure.exception.BusinessException;
 import pl.pjatk.learnease.entity.learn.Subject;
 import pl.pjatk.learnease.repository.learn.SubjectRepository;
 
@@ -13,6 +14,6 @@ public class SubjectService {
 
     public Subject getSubjectByName(String subjectName) {
         return subjectRepository.findSubjectByName(subjectName)
-                .orElseThrow(() -> new RuntimeException("Cannot find subject with name: " + subjectName));
+                .orElseThrow(() -> new BusinessException("Cannot find subject with name: " + subjectName));
     }
 }
