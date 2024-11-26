@@ -23,12 +23,13 @@ public class Point {
     private CheckingTest checkingTest;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "material_id")
     private Material material;
 
+    @Column(name = "deleted", nullable = false)
     private boolean deleted;
 }

@@ -16,19 +16,19 @@ public class Question {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer questionId;
 
-    @Column(name = "answer_a")
+    @Column(name = "answer_a", nullable = false)
     private String answerA;
 
-    @Column(name = "answer_b")
+    @Column(name = "answer_b", nullable = false)
     private String answerB;
 
-    @Column(name = "answer_c")
+    @Column(name = "answer_c", nullable = false)
     private String answerC;
 
-    @Column(name = "answer_d")
+    @Column(name = "answer_d", nullable = false)
     private String answerD;
 
-    @Column(name = "correct_answer")
+    @Column(name = "correct_answer", nullable = false)
     private String correctAnswer;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,5 +43,6 @@ public class Question {
     @JoinColumn(name = "quiz_room_id")
     private QuizRoom quizRoom;
 
+    @Column(name = "deleted", nullable = false)
     private boolean deleted;
 }

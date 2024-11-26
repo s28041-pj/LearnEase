@@ -21,11 +21,11 @@ public class ProgressTracking {
     private Integer progressId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "material_id")
+    @JoinColumn(name = "material_id", nullable = false)
     private Material material;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -36,9 +36,9 @@ public class ProgressTracking {
     @JoinColumn(name = "diagnostic_test_id")
     private DiagnosticTest diagnosticTest;
 
-    @Column(name = "progress_value")
+    @Column(name = "progress_value", nullable = false)
     private Float progressValue;
 
-    @Column(name = "updated_at")
-    private LocalDate updateAt;
+    @Column(name = "updated_at", nullable = false)
+    private LocalDate updatedAt;
 }

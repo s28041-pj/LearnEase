@@ -22,11 +22,12 @@ public class Log {
     private Integer logId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "log_date")
+    @Column(name = "log_date", nullable = false)
     private LocalDateTime logDate;
 
+    @Column(name = "content", nullable = false)
     private String content;
 }

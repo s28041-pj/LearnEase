@@ -19,22 +19,25 @@ public class Material {
     private Integer materialId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id")
+    @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "level_id")
+    @JoinColumn(name = "level_id", nullable = false)
     private Level level;
 
+    @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "pdf_url")
+    @Column(name = "pdf_url", nullable = false)
     private String pdfUrl;
 
-    @Column(name = "created_at")
+    @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;
 
+    @Column(name = "completed", nullable = false)
     private boolean completed;
 
+    @Column(name = "deleted", nullable = false)
     private boolean deleted;
 }

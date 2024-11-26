@@ -1,4 +1,4 @@
-package pl.pjatk.learnease.configure;
+package pl.pjatk.learnease.configure.security;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 
+import static pl.pjatk.learnease.configure.UserContextHolder.setContextUser;
+
 @Component
 public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
 
@@ -15,6 +17,7 @@ public class HttpLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request,
                                         HttpServletResponse response,
                                         Authentication authentication) throws IOException {
+        setContextUser(null);
         response.setStatus(HttpServletResponse.SC_OK);
         response.sendRedirect("/login");
         response.getWriter().flush();

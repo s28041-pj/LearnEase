@@ -22,19 +22,20 @@ public class QuizParticipant {
     private Integer participantId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "quiz_room_id")
+    @JoinColumn(name = "quiz_room_id", nullable = false)
     private QuizRoom quizRoom;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "score")
+    @Column(name = "score", nullable = false)
     private Float score;
 
-    @Column(name = "joined_at")
+    @Column(name = "joined_at", nullable = false)
     private LocalDateTime joinedAt;
 
+    @Column(name = "completed", nullable = false)
     private boolean completed;
 
 }
