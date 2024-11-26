@@ -1,11 +1,13 @@
 package pl.pjatk.learnease.entity.test;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pjatk.learnease.entity.learn.Subject;
 import pl.pjatk.learnease.entity.user.User;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity

@@ -1,7 +1,10 @@
 package pl.pjatk.learnease.entity.ranking;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pjatk.learnease.entity.learn.Material;
 import pl.pjatk.learnease.entity.test.CheckingTest;
 import pl.pjatk.learnease.entity.user.User;
