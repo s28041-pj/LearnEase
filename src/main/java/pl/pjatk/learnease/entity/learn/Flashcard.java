@@ -1,7 +1,10 @@
 package pl.pjatk.learnease.entity.learn;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.ResultCheckStyle;
 import org.hibernate.annotations.SQLDelete;
 import pl.pjatk.learnease.entity.user.User;
@@ -17,7 +20,7 @@ public class Flashcard {
     @Id
     @Column(name = "flashcard_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer flashcardId;
+    private Long flashcardId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

@@ -1,6 +1,5 @@
 package pl.pjatk.learnease.configure.security;
 
-import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,6 +43,12 @@ public class SecurityConfig {
                         // flashcards
                         .requestMatchers("/flashcards",
                                 "/flashcards/*").hasAnyAuthority(anyAuthority)
+
+                        // diagnosticTests
+                        .requestMatchers(HttpMethod.POST,"/diagnostic-test/create").hasAuthority(adminAuthority)
+                        .requestMatchers(HttpMethod.DELETE,"/diagnostic-test/{testId}").hasAuthority(adminAuthority)
+                        .requestMatchers("/diagnostic-test/{subject}").hasAnyAuthority(anyAuthority)
+
 
                         //add login
                         .requestMatchers("/add-login.html").permitAll()

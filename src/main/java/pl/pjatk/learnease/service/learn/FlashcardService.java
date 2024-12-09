@@ -75,7 +75,7 @@ public class FlashcardService {
         return new Flashcard(null, user, subject, requestedFlashcard.frontText(), requestedFlashcard.backText(), false);
     }
 
-    private Integer getContextUserId() {
+    private Long getContextUserId() {
         return getContextUser().getUserId();
     }
 

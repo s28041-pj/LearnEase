@@ -1,32 +1,33 @@
 package pl.pjatk.learnease.entity.test;
 
 import jakarta.persistence.*;
-import lombok.*;
-import pl.pjatk.learnease.entity.learn.Subject;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pjatk.learnease.entity.user.User;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "diagnostic_tests")
+@Table(name = "diagnostic_test_results")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class DiagnosticTest {
+public class DiagnosticTestResult {
     @Id
-    @Column(name = "diagnostic_test_id", unique = true)
+    @Column(name = "test_result_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer diagnosticTestId;
+    private Long testResultId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "subject_id", nullable = false)
-    private Subject subject;
+    @JoinColumn(name = "test_template_id", nullable = false)
+    private DiagnosticTestTemplate testTemplate;
 
     @Column(name = "date_taken", nullable = false)
     private LocalDateTime dateTaken;

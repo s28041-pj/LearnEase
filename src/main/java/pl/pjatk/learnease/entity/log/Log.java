@@ -19,7 +19,7 @@ public class Log {
     @Id
     @Column(name = "log_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer logId;
+    private Long logId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)

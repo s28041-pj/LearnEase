@@ -1,9 +1,12 @@
 package pl.pjatk.learnease.entity.learn;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pjatk.learnease.entity.test.CheckingTest;
-import pl.pjatk.learnease.entity.test.DiagnosticTest;
+import pl.pjatk.learnease.entity.test.DiagnosticTestResult;
 import pl.pjatk.learnease.entity.user.User;
 
 import java.time.LocalDate;
@@ -18,7 +21,7 @@ public class ProgressTracking {
     @Id
     @Column(name = "progress_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer progressId;
+    private Long progressId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -33,8 +36,8 @@ public class ProgressTracking {
     private CheckingTest checkingTest;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diagnostic_test_id")
-    private DiagnosticTest diagnosticTest;
+    @JoinColumn(name = "test_result_id")
+    private DiagnosticTestResult diagnosticTestResult;
 
     @Column(name = "progress_value", nullable = false)
     private Float progressValue;

@@ -1,7 +1,10 @@
 package pl.pjatk.learnease.entity.test;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pjatk.learnease.entity.user.User;
 
 @Entity
@@ -14,7 +17,7 @@ public class Answer {
     @Id
     @Column(name = "answer_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer answerId;
+    private Long answerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", nullable = false)

@@ -1,7 +1,10 @@
 package pl.pjatk.learnease.entity.learn;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import pl.pjatk.learnease.entity.user.Level;
 
 import java.time.LocalDate;
@@ -16,7 +19,7 @@ public class Material {
     @Id
     @Column(name = "material_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer materialId;
+    private Long materialId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", nullable = false)

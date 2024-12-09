@@ -6,7 +6,7 @@ import pl.pjatk.learnease.entity.user.User;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findUserByUsername(@NotNull String username);
 }
