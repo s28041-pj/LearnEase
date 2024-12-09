@@ -1,4 +1,4 @@
-package pl.pjatk.learnease.entity.test;
+package pl.pjatk.learnease.entity.user;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -6,21 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import pl.pjatk.learnease.entity.learn.Subject;
-import pl.pjatk.learnease.entity.user.User;
-
-import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "checking_tests")
+@Table(name = "user_subject_levels")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class CheckingTest {
+public class UserSubjectLevel {
+
     @Id
-    @Column(name = "checking_test_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long checkingTestId;
+    @Column(name = "user_subject_level_id", unique = true)
+    private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
@@ -30,15 +28,11 @@ public class CheckingTest {
     @JoinColumn(name = "subject_id", nullable = false)
     private Subject subject;
 
-    @Column(name = "test_date", nullable = false)
-    private LocalDateTime testDate;
-
-    @Column(name = "score", nullable = false)
-    private Float score;
-
-    @Column(name = "previous_score")
-    private Float previousScore;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "level_id", nullable = false)
+    private Level level;
 
     @Column(name = "deleted", nullable = false)
-    private boolean deleted;
+    private boolean deleted = false;
 }
+

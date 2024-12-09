@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -18,7 +19,7 @@ public class User {
     @Id
     @Column(name = "user_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer userId;
+    private Long userId;
 
     @Column(name = "username", nullable = false)
     private String username;
@@ -29,9 +30,8 @@ public class User {
     @Column(name = "password", nullable = false)
     private byte[] password;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "level_id")
-    private Level level;
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<UserSubjectLevel> userSubjectLevels;
 
     @Column(name = "created_at", nullable = false)
     private LocalDate createdAt;

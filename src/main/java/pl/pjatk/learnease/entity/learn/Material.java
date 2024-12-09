@@ -19,7 +19,7 @@ public class Material {
     @Id
     @Column(name = "material_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer materialId;
+    private Long materialId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "subject_id", nullable = false)

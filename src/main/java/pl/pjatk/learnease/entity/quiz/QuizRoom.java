@@ -21,7 +21,7 @@ public class QuizRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "quiz_room_id")
-    private Integer quizRoomId;
+    private Long quizRoomId;
 
     @Column(name = "name", nullable = false)
     private String name;

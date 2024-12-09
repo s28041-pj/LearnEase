@@ -19,13 +19,13 @@ public class Ranking {
     @Id
     @Column(name = "ranking_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer rankingId;
+    private Long rankingId;
 
     @Column(name = "rank", nullable = false)
-    private Integer rank;
+    private Long rank;
 
     @Column(name = "previous_rank")
-    private Integer previousRank;
+    private Long previousRank;
 
     @Column(name = "points", nullable = false)
     private Float points;

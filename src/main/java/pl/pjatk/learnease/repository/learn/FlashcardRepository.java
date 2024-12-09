@@ -15,7 +15,7 @@ public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
            WHERE flashcard.user.userId = :userId
             AND flashcard.deleted = false
            """)
-    List<Flashcard> findAllByUserUserId(Integer userId);
+    List<Flashcard> findAllByUserUserId(Long userId);
 
     @Query("""
            SELECT flashcard FROM Flashcard flashcard
@@ -23,7 +23,7 @@ public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
             AND flashcard.flashcardId = :flashcardId
             AND flashcard.deleted = false
            """)
-    Optional<Flashcard> findByFlashcardIdAndUserUserId(Integer userId, Long flashcardId);
+    Optional<Flashcard> findByFlashcardIdAndUserUserId(Long userId, Long flashcardId);
 
     @Query("""
            SELECT flashcard FROM Flashcard flashcard
@@ -31,7 +31,7 @@ public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
             AND flashcard.subject.name = :subjectName
             AND flashcard.deleted = false
            """)
-    List<Flashcard> findAllByUserUserIdAndSubjectName(Integer userId, String subjectName);
+    List<Flashcard> findAllByUserUserIdAndSubjectName(Long userId, String subjectName);
 
     @Modifying
     @Query("""
@@ -39,5 +39,5 @@ public interface FlashcardRepository extends JpaRepository<Flashcard, Long> {
            WHERE flashcard.user.userId = :userId
             AND flashcard.flashcardId = :flashcardId
            """)
-    void deleteByFlashcardIdAndUserUserId(Long flashcardId, Integer userId);
+    void deleteByFlashcardIdAndUserUserId(Long flashcardId, Long userId);
 }

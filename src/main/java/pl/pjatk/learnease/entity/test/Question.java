@@ -17,7 +17,10 @@ public class Question {
     @Id
     @Column(name = "question_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer questionId;
+    private Long questionId;
+
+    @Column(name = "question_text", nullable = false)
+    private String questionText;
 
     @Column(name = "answer_a", nullable = false)
     private String answerA;
@@ -39,8 +42,8 @@ public class Question {
     private CheckingTest checkingTest;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "diagnostic_test_id")
-    private DiagnosticTest diagnosticTest;
+    @JoinColumn(name = "diagnostic_test_template_id")
+    private DiagnosticTestTemplate diagnosticTestTemplate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "quiz_room_id")

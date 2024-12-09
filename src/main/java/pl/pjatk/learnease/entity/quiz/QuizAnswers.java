@@ -18,7 +18,7 @@ public class QuizAnswers {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "quiz_answer_id", nullable = false)
-    private Integer quizAnswerId;
+    private Long quizAnswerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id", nullable = false)

@@ -19,7 +19,7 @@ public class Point {
     @Id
     @Column(name = "point_id", unique = true)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer pointId;
+    private Long pointId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "checking_test_id")

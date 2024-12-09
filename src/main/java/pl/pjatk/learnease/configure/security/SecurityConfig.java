@@ -44,6 +44,12 @@ public class SecurityConfig {
                         .requestMatchers("/flashcards",
                                 "/flashcards/*").hasAnyAuthority(anyAuthority)
 
+                        // diagnosticTests
+                        .requestMatchers(HttpMethod.POST,"/diagnostic-test/create").hasAuthority(adminAuthority)
+                        .requestMatchers(HttpMethod.DELETE,"/diagnostic-test/{testId}").hasAuthority(adminAuthority)
+                        .requestMatchers("/diagnostic-test/{subject}").hasAnyAuthority(anyAuthority)
+
+
                         //add login
                         .requestMatchers("/add-login.html").permitAll()
                         .requestMatchers(HttpMethod.POST,"/add-login").permitAll()
