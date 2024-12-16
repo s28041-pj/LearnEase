@@ -199,7 +199,7 @@ INSERT INTO logs (user_id, log_date, content) VALUES (1, '2024-11-19 12:00:00', 
 INSERT INTO subjects (name, description, deleted) VALUES ('Mathematics', 'Math course content', false);
 INSERT INTO materials (subject_id, level_id, title, pdf_url, created_at, completed, deleted) VALUES (1, 1, 'Algebra Basics', 'https://www.cimat.mx/ciencia_para_jovenes/bachillerato/libros/algebra_gelfand.pdf', '2024-11-01', false, false);
 INSERT INTO flashcards (user_id, subject_id, front_text, back_text, deleted) VALUES (1, 1, 'What is 2 + 2?', '4', false);
-INSERT INTO diagnostic_44tests (user_id, subject_id, date_taken, score, previous_score, deleted) VALUES (1, 1, '2024-11-10', 85.0, 80.0, false);
+#INSERT INTO diagnostic_44tests (user_id, subject_id, date_taken, score, previous_score, deleted) VALUES (1, 1, '2024-11-10', 85.0, 80.0, false);
 INSERT INTO checking_tests (user_id, subject_id, test_date, score, previous_score, deleted) VALUES (1, 1, '2024-11-15', 90.0, 85.0, false);
 INSERT INTO quiz_rooms (name, access_code, started_at, ended_at, completed, status) VALUES ('Math Quiz Room', 'ABC123', NULL, NULL, FALSE, 'CREATED');
 INSERT INTO quiz_participants (quiz_room_id, user_id, score, completed) VALUES (1, 1, 0, FALSE);
