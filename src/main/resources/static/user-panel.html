@@ -2,46 +2,57 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LearnEase</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/userStyles.css">
 </head>
-<style>
-    body {
-        width: 100%;
-        background-color: lightgray;
-        font-family: Arial, "Arial Black", serif;
-    }
-
-    .container {
-        padding-top: 1rem;
-        margin: 0 auto;
-        width: 561px;
-        gap: 20px;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-
-    .container div {
-        background-color: #ee7724;
-        text-align: center;
-    }
-
-    a {
-        display: block;
-        background-color: #ee7724;
-        width: 150px;
-        padding: 15px 2px;
-        text-decoration: none;
-        color: black;
-    }
-
-    h1 {
-        text-align: center;
-    }
-</style>
 <body>
-<h1>Welcome user!</h1>
+<header>
+    <div class="logo">
+        <h1>LearnEase <span class="beta">Beta</span></h1>
+    </div>
+    <nav>
+        <button class="btn btn-outline-danger btn-sm" onclick="logout()">Logout</button>
+    </nav>
+</header>
+<main>
+    <section class="hero">
+        <h2>Learn with Ease, Master with Confidence.</h2>
+        <p>What do you want to learn today?</p>
+    </section>
+    <section class="features">
+        <h3>Unlock the Power of <span class="highlight">Learning with LearnEase</span></h3>
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-item" onclick="window.location.href='flashcards.html'">
+                <h4>Learn with Flashcards</h4>
+                <p>Our platform uses flashcards to explain complex concepts in a way that's easy to understand and
+                    remember.</p>
+            </div>
+            <!-- Feature 2 -->
+            <div class="feature-item">
+                <h4>Check Your Level</h4>
+                <p>Our platform offers diagnostic tests to help you assess your current level and identify areas for
+                    improvement effectively.</p>
+            </div>
+            <!-- Feature 3 -->
+            <div class="feature-item">
+                <h4>Hands-On Learning</h4>
+                <p>Learn by doing! Gain valuable knowledge through interactive tasks.</p>
+            </div>
+            <!-- Feature 4 -->
+            <div class="feature-item">
+                <h4>QuizRoom</h4>
+                <p>Our platform features a Quiz Room where you can take quizzes, compare your results with others,
+                    and track your progress in a fun and competitive environment.</p>
+            </div>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 2024 LearnEase. All rights reserved.</p>
+</footer>
+<script src="js/shared/logout.js"></script>
 </body>
 </html>

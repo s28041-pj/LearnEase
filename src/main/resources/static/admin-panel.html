@@ -1,47 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LearnEase</title>
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<style>
-    body {
-        width: 100%;
-        background-color: lightgray;
-        font-family: Arial, "Arial Black", serif;
-    }
-
-    .container {
-        padding-top: 1rem;
-        margin: 0 auto;
-        width: 561px;
-        gap: 20px;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-        flex-wrap: wrap;
-    }
-
-    .container div {
-        background-color: #ee7724;
-        text-align: center;
-    }
-
-    a {
-        display: block;
-        background-color: #ee7724;
-        width: 150px;
-        padding: 15px 2px;
-        text-decoration: none;
-        color: black;
-    }
-
-    h1 {
-        text-align: center;
-    }
-</style>
 <body>
-<h1>Welcome admin!</h1>
+<header>
+    <div class="logo">
+        <h1>Admin Panel - LearnEase</h1>
+    </div>
+    <nav>
+        <a href="#">Dashboard</a>
+        <a href="#">Users</a>
+        <a href="#">Content</a>
+        <a href="#">Logs</a>
+    </nav>
+    <nav>
+        <button class="btn btn-outline-danger btn-sm" onclick="logout()">Logout</button>
+    </nav>
+</header>
+
+<main>
+    <section class="dashboard">
+        <h2>Welcome, Admin!</h2>
+        <div class="stats-container">
+            <div class="stat-box">
+                <h3>Total Users(hardcoded - todo)</h3>
+                <p>150</p>
+            </div>
+            <div class="stat-box">
+                <h3>Rankings(hardcoded todo)</h3>
+                <p>5</p>
+            </div>
+            <div class="stat-box">
+                <h3>Subject(hardcoded todo)</h3>
+                <p>30</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="user-management">
+        <h2>Manage Users(hardcoded todo)</h2>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>john_doe</td>
+                <td>john.doe@example.com</td>
+                <td>USER</td>
+                <td>Active</td>
+                <td><button class="btn-edit">Active/Inactive</button> <button class="btn-delete">Delete</button></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>jane_smith</td>
+                <td>jane.smith@example.com</td>
+                <td>ADMIN</td>
+                <td>Active</td>
+                <td><button class="btn-edit">Active/Inactive</button> <button class="btn-delete">Delete</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2024 LearnEase. All rights reserved.</p>
+</footer>
+<script src="js/shared/logout.js"></script>
 </body>
 </html>

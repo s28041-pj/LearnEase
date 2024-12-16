@@ -1,0 +1,161 @@
+/* style.css */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #000000;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header .logo h1 {
+    font-size: 24px;
+    margin: 0;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+header .beta {
+    font-size: 14px;
+    color: #77dd77;
+    margin-left: 5px;
+    font-weight: 800;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hero {
+    text-align: center;
+    background: linear-gradient(120deg, #4caf50, #77dd77);
+    color: white;
+    padding: 50px 20px;
+}
+
+.hero h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-form input {
+    width: 60%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+}
+
+.search-form button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.features {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.features h3 {
+    font-size: 28px;
+    margin-bottom: 30px;
+}
+
+.features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.feature-item {
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    width: 250px;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.feature-item p {
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.feature-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    background-color: #eef7ff;
+}
+
+
+/* Footer */
+footer {
+    background-color: #020101;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+}
+
+.highlight {
+    position: relative;
+    color: #4caf50;
+    font-weight: bold;
+}
+/*green highlights*/
+.highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: #4caf50;
+    z-index: -1;
+    transform: skewX(-15deg);
+}

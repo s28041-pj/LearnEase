@@ -1,0 +1,147 @@
+/* Global styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Gradient dla tła lewej sekcji */
+.gradient-custom-2 {
+    background: -webkit-linear-gradient(to right, #014d36, #028052, #3c9d3f, #80c878, #d5f5d3);
+    background: linear-gradient(to right, #014d36, #028052, #3c9d3f, #80c878, #d5f5d3);
+    color: white;
+}
+
+/* Background for the form */
+.gradient-form {
+    background: linear-gradient(to right, #e8f5e9, #f7f7f7);
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}
+
+/* Buttons */
+.btn-primary {
+    background: linear-gradient(to right, #004d40, #388e3c, #81c784);
+    border: none;
+    font-weight: bold;
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(to right, #81c784, #388e3c, #004d40);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-danger {
+    border: 2px solid #388e3c;
+    color: #388e3c;
+    font-weight: bold;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-danger:hover {
+    background-color: #388e3c;
+    color: #fff;
+}
+
+/* Form styles */
+.form-control {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    height: 45px;
+}
+
+/* Text styles */
+.text-white {
+    font-weight: bold;
+}
+
+.text-white h4 {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.text-white p {
+    font-size: 14px;
+    line-height: 1.6;
+}
+/* Header Styles */
+header {
+    background-color: #222;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+}
+
+header .logo .beta {
+    font-size: 14px;
+    color: #77dd77;
+    margin-left: 5px;
+}
+
+header nav {
+    display: none;
+}
+
+
+/* Footer */
+footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 14px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+/* Fade-out animation */
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-out {
+    animation: fadeOut 3s forwards;
+}
+
+.success-message {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    z-index: 10;
+    max-width: 300px;
+}
